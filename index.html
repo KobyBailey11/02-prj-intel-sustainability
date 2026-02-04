@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+y<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -39,7 +39,15 @@
     <p class="timeline-hint">
       Hover over a year (desktop) or tap a year (phone) to view details.
     </p>
-    <section class="timeline" aria-label="Intel sustainability timeline">
+    
+    <!-- Timeline navigation wrapper -->
+    <div class="timeline-wrapper">
+      <!-- Left arrow button -->
+      <button class="timeline-arrow timeline-arrow-left" aria-label="Scroll left">
+        ◀
+      </button>
+      
+      <section class="timeline" aria-label="Intel sustainability timeline">
 
       <!-- Timeline Item 1: 1968 -->
       <div class="timeline-item" data-timeline-item>
@@ -195,13 +203,23 @@
         </div>
       </div>
     </section>
+    
+    <!-- Right arrow button -->
+    <button class="timeline-arrow timeline-arrow-right" aria-label="Scroll right">
+      ▶
+    </button>
+  </div>
 
   </main>
 
   <!-- Small script to support tap-to-toggle on phones -->
   <script>
     const timelineItems = document.querySelectorAll('[data-timeline-item]');
+    const timeline = document.querySelector('.timeline');
+    const leftArrow = document.querySelector('.timeline-arrow-left');
+    const rightArrow = document.querySelector('.timeline-arrow-right');
 
+    // Timeline item toggle behavior
     timelineItems.forEach((item) => {
       const button = item.querySelector('.timeline-year');
 
@@ -217,6 +235,21 @@
         if (!isOpen) {
           item.classList.add('is-open');
         }
+      });
+    });
+
+    // Arrow navigation
+    leftArrow.addEventListener('click', () => {
+      timeline.scrollBy({
+        left: -340,
+        behavior: 'smooth'
+      });
+    });
+
+    rightArrow.addEventListener('click', () => {
+      timeline.scrollBy({
+        left: 340,
+        behavior: 'smooth'
       });
     });
   </script>
