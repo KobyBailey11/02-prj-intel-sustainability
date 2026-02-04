@@ -1,1 +1,176 @@
-/* Add your CSS here */
+/* Basic page setup */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	/* Poppins is a bold, clean font that pops */
+	font-family: "Poppins", Arial, Helvetica, sans-serif;
+	line-height: 1.6;
+	background-color: #f4f7fb;
+	color: #0a1f44;
+}
+
+/* Header / Hero */
+header {
+	background-color: #0a1f44;
+	color: #ffffff;
+	padding: 32px 16px;
+	text-align: center;
+}
+
+header img {
+	width: 120px;
+	height: auto;
+	margin-bottom: 12px;
+}
+
+header h1 {
+	font-size: 2rem;
+	margin-bottom: 8px;
+}
+
+header p {
+	max-width: 640px;
+	margin: 0 auto;
+	font-size: 1rem;
+}
+
+/* Timeline layout */
+main {
+	padding: 24px 16px 40px;
+}
+
+.timeline {
+	max-width: 800px;
+	margin: 0 auto;
+	/* Horizontal timeline row */
+	display: flex;
+	gap: 16px;
+	overflow-x: auto;
+	padding: 8px 4px 16px;
+	scroll-snap-type: x mandatory;
+}
+
+/* Each timeline item */
+.timeline-item {
+	/* One big bubble that holds the year + details */
+	background-color: #ffffff;
+	border-radius: 16px;
+	padding: 16px;
+	margin: 12px 0;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	min-width: 260px;
+	max-width: 320px;
+	scroll-snap-align: start;
+}
+
+/* The dot on the timeline */
+/* Remove the timeline dot when using bubbles */
+.timeline-item::before {
+	content: none;
+}
+
+/* The year button */
+.timeline-year {
+	background-color: #ffffff;
+	border: 2px solid #3a7bd5;
+	color: #0a1f44;
+	padding: 6px 12px;
+	border-radius: 20px;
+	font-weight: bold;
+	font-size: 0.95rem;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease;
+	flex-shrink: 0;
+	text-align: center;
+}
+
+.timeline-year:hover,
+.timeline-year:focus {
+	background-color: #3a7bd5;
+	color: #ffffff;
+}
+
+/* The card that opens and closes */
+.timeline-card {
+	/* The details live inside the same bubble */
+	background-color: transparent;
+	border-radius: 0;
+	padding: 0;
+	margin-top: 0;
+	box-shadow: none;
+	flex: 1;
+	width: 100%;
+	/* Start hidden */
+	max-height: 0;
+	overflow: hidden;
+	opacity: 0;
+	transform: translateY(-6px);
+	/* Smooth transition */
+	transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Card images */
+.timeline-card img {
+	width: 100%;
+	height: auto;
+	display: block;
+	margin: 8px 0 12px;
+	border-radius: 10px;
+}
+
+.timeline-card h3 {
+	margin-bottom: 8px;
+}
+
+/* Show card on hover (and on keyboard focus) */
+.timeline-item:hover .timeline-card,
+.timeline-item:focus-within .timeline-card {
+	max-height: 800px;
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Show card when a phone tap marks it open */
+.timeline-item.is-open .timeline-card {
+	max-height: 800px;
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Small helper text */
+.timeline-hint {
+	max-width: 800px;
+	margin: 12px auto 0;
+	text-align: center;
+	font-size: 0.95rem;
+	color: #455a7a;
+}
+
+/* Simple responsive tweaks */
+@media (max-width: 600px) {
+	header h1 {
+		font-size: 1.6rem;
+	}
+
+	.timeline-year {
+		width: 100%;
+		text-align: left;
+	}
+
+	.timeline-item {
+		flex-direction: column;
+	}
+
+	.timeline {
+		max-width: 100%;
+	}
+}

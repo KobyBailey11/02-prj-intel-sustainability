@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intel: Sustainability Through the Ages</title>
+  <!-- Popping font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -27,117 +34,191 @@
     </div>
   </header>
 
-  <!-- Timeline Cards Section -->
-  <section>
+  <!-- Interactive Timeline Section -->
+  <main>
+    <p class="timeline-hint">
+      Hover over a year (desktop) or tap a year (phone) to view details.
+    </p>
+    <section class="timeline" aria-label="Intel sustainability timeline">
 
-    <!-- Card 1: 1968 -->
-    <div>
-      <h2>1968</h2>
-      <h3>Intel Founded</h3>
-      <!-- Add image -->
-      <p>
-        Robert Noyce and Gordon Moore rename the newly formed company 
-        NM Electronics to Intel Corporation, laying the foundation for 
-        decades of technological innovation.
-      </p>
-    </div>
+      <!-- Timeline Item 1: 1968 -->
+      <div class="timeline-item" data-timeline-item>
+        <!-- Button acts like a toggle to open/close the card -->
+        <button class="timeline-year" type="button">
+          1968
+        </button>
+        <div class="timeline-card">
+          <h3>Intel Founded</h3>
+          <!-- Event image -->
+          <img src="img/1.jpg" alt="Early Intel offices" />
+          <p>
+            Robert Noyce and Gordon Moore rename the newly formed company
+            NM Electronics to Intel Corporation, laying the foundation for
+            decades of technological innovation.
+          </p>
+        </div>
+      </div>
 
-    <!-- Card 2: 1971 -->
-    <div>
-      <h2>1971</h2>
-      <h3>First Microprocessor</h3>
-      <!-- Add image -->
-      <p>
-        Intel debuts the 4004, the world's first commercial microprocessor, 
-        igniting the microprocessor revolution and propelling the future 
-        of computing devices.
-      </p>
-    </div>
+      <!-- Timeline Item 2: 1971 -->
+      <div class="timeline-item" data-timeline-item>
+        <button class="timeline-year" type="button">
+          1971
+        </button>
+        <div class="timeline-card">
+          <h3>First Microprocessor</h3>
+          <!-- Event image -->
+          <img src="img/2.jpg" alt="Close-up of a microprocessor" />
+          <p>
+            Intel debuts the 4004, the world's first commercial microprocessor,
+            igniting the microprocessor revolution and propelling the future
+            of computing devices.
+          </p>
+        </div>
+      </div>
 
-    <!-- Card 3: 1978 -->
-    <div>
-      <h2>1978</h2>
-      <h3>8086 Processor</h3>
-      <!-- Add image -->
-      <p>
-        Launch of the 8086 processor, establishing the x86 architecture 
-        that drives countless PCs and servers in the modern era.
-      </p>
-    </div>
+      <!-- Timeline Item 3: 1978 -->
+      <div class="timeline-item" data-timeline-item>
+        <button class="timeline-year" type="button">
+          1978
+        </button>
+        <div class="timeline-card">
+          <h3>8086 Processor</h3>
+          <!-- Event image -->
+          <img src="img/3.jpg" alt="Vintage computer hardware" />
+          <p>
+            Launch of the 8086 processor, establishing the x86 architecture
+            that drives countless PCs and servers in the modern era.
+          </p>
+        </div>
+      </div>
 
-    <!-- Card 4: 1985 -->
-    <div>
-      <h2>1985</h2>
-      <h3>386 Processor</h3>
-      <!-- Add image -->
-      <p>
-        Intel introduces the 386 processor with 32-bit architecture, 
-        ushering in a new era of performance and multitasking for 
-        personal computers.
-      </p>
-    </div>
+      <!-- Timeline Item 4: 1985 -->
+      <div class="timeline-item" data-timeline-item>
+        <button class="timeline-year" type="button">
+          1985
+        </button>
+        <div class="timeline-card">
+          <h3>386 Processor</h3>
+          <!-- Event image -->
+          <img src="img/4.jpg" alt="Classic circuit board" />
+          <p>
+            Intel introduces the 386 processor with 32-bit architecture,
+            ushering in a new era of performance and multitasking for
+            personal computers.
+          </p>
+        </div>
+      </div>
 
-    <!-- Card 5: 2006 -->
-    <div>
-      <h2>2006</h2>
-      <h3>Peak GHG Emissions</h3>
-      <!-- Add image -->
-      <p>
-        This year marks Intel's highest annual greenhouse gas emissions 
-        for operations. Over subsequent years, Intel invests heavily in 
-        chemical abatement, renewable energy, and energy-efficient 
-        manufacturing to reverse this trend.
-      </p>
-    </div>
+      <!-- Timeline Item 5: 2006 -->
+      <div class="timeline-item" data-timeline-item>
+        <button class="timeline-year" type="button">
+          2006
+        </button>
+        <div class="timeline-card">
+          <h3>Peak GHG Emissions</h3>
+          <!-- Event image -->
+          <img src="img/1.jpg" alt="Industrial facilities" />
+          <p>
+            This year marks Intel's highest annual greenhouse gas emissions
+            for operations. Over subsequent years, Intel invests heavily in
+            chemical abatement, renewable energy, and energy-efficient
+            manufacturing to reverse this trend.
+          </p>
+        </div>
+      </div>
 
-    <!-- Card 6: 2020 -->
-    <div>
-      <h2>2020</h2>
-      <h3>RISE Strategy</h3>
-      <!-- Add image -->
-      <p>
-        Intel launches its RISE (Responsible, Inclusive, Sustainable, 
-        Enabling) strategy and 2030 goals, aiming to drive industry-wide 
-        progress on climate action, water stewardship, and waste reduction.
-      </p>
-    </div>
+      <!-- Timeline Item 6: 2020 -->
+      <div class="timeline-item" data-timeline-item>
+        <button class="timeline-year" type="button">
+          2020
+        </button>
+        <div class="timeline-card">
+          <h3>RISE Strategy</h3>
+          <!-- Event image -->
+          <img src="img/2.jpg" alt="Sustainable technology concept" />
+          <p>
+            Intel launches its RISE (Responsible, Inclusive, Sustainable,
+            Enabling) strategy and 2030 goals, aiming to drive industry-wide
+            progress on climate action, water stewardship, and waste reduction.
+          </p>
+        </div>
+      </div>
 
-    <!-- Card 7: 2022 -->
-    <div>
-      <h2>2022</h2>
-      <h3>Net-Zero By 2040</h3>
-      <!-- Add image -->
-      <p>
-        Intel announces its commitment to achieve net-zero greenhouse 
-        gas emissions (Scope 1 and 2) across its global operations 
-        by 2040, building on years of environmental initiatives.
-      </p>
-    </div>
+      <!-- Timeline Item 7: 2022 -->
+      <div class="timeline-item" data-timeline-item>
+        <button class="timeline-year" type="button">
+          2022
+        </button>
+        <div class="timeline-card">
+          <h3>Net-Zero By 2040</h3>
+          <!-- Event image -->
+          <img src="img/3.jpg" alt="Clean energy and technology" />
+          <p>
+            Intel announces its commitment to achieve net-zero greenhouse
+            gas emissions (Scope 1 and 2) across its global operations
+            by 2040, building on years of environmental initiatives.
+          </p>
+        </div>
+      </div>
 
-    <!-- Card 8: 2023 -->
-    <div>
-      <h2>2023</h2>
-      <h3>Renewable Electricity</h3>
-      <!-- Add image -->
-      <p>
-        The company achieves 99% renewable electricity usage worldwide, 
-        helping to drastically lower carbon emissions and driving progress 
-        toward Intel's long-term sustainability goals.
-      </p>
-    </div>
+      <!-- Timeline Item 8: 2023 -->
+      <div class="timeline-item" data-timeline-item>
+        <button class="timeline-year" type="button">
+          2023
+        </button>
+        <div class="timeline-card">
+          <h3>Renewable Electricity</h3>
+          <!-- Event image -->
+          <img src="img/4.jpg" alt="Renewable energy visuals" />
+          <p>
+            The company achieves 99% renewable electricity usage worldwide,
+            helping to drastically lower carbon emissions and driving progress
+            toward Intel's long-term sustainability goals.
+          </p>
+        </div>
+      </div>
 
-    <!-- Card 9: 2024 -->
-    <div>
-      <h2>2024</h2>
-      <h3>Sustainability Summit</h3>
-      <!-- Add image -->
-      <p>
-        Intel hosts its first Sustainability Summit, uniting suppliers, 
-        government officials, and industry leaders to collaborate on 
-        next-generation sustainable semiconductor manufacturing.
-      </p>
-    </div>
-  </section>
-  <p>Scroll to view timeline | Hover over cards to learn more!</p>
+      <!-- Timeline Item 9: 2024 -->
+      <div class="timeline-item" data-timeline-item>
+        <button class="timeline-year" type="button">
+          2024
+        </button>
+        <div class="timeline-card">
+          <h3>Sustainability Summit</h3>
+          <!-- Event image -->
+          <img src="img/1.jpg" alt="People collaborating at a summit" />
+          <p>
+            Intel hosts its first Sustainability Summit, uniting suppliers,
+            government officials, and industry leaders to collaborate on
+            next-generation sustainable semiconductor manufacturing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Small script to support tap-to-toggle on phones -->
+  <script>
+    const timelineItems = document.querySelectorAll('[data-timeline-item]');
+
+    timelineItems.forEach((item) => {
+      const button = item.querySelector('.timeline-year');
+
+      button.addEventListener('click', () => {
+        const isOpen = item.classList.contains('is-open');
+
+        // Close all items first
+        timelineItems.forEach((otherItem) => {
+          otherItem.classList.remove('is-open');
+        });
+
+        // Toggle this one
+        if (!isOpen) {
+          item.classList.add('is-open');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
