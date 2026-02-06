@@ -1,4 +1,4 @@
-y<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -37,7 +37,8 @@ y<!DOCTYPE html>
   <!-- Interactive Timeline Section -->
   <main>
     <p class="timeline-hint">
-      Hover over a year (desktop) or tap a year (phone) to view details.
+      <span class="hint-desktop">🖱️ Hover over a year to view details • Use arrow buttons to scroll</span>
+      <span class="hint-mobile">👆 Tap a year to view details</span>
     </p>
     
     <!-- Timeline navigation wrapper -->
@@ -218,6 +219,10 @@ y<!DOCTYPE html>
     const timeline = document.querySelector('.timeline');
     const leftArrow = document.querySelector('.timeline-arrow-left');
     const rightArrow = document.querySelector('.timeline-arrow-right');
+    
+    // Track hover timeout for each item
+    const hoverTimeouts = new Map();
+    const HOVER_DELAY = 300; // Delay in milliseconds before closing card
 
     // Timeline item toggle behavior
     timelineItems.forEach((item) => {
@@ -229,6 +234,11 @@ y<!DOCTYPE html>
         // Close all items first
         timelineItems.forEach((otherItem) => {
           otherItem.classList.remove('is-open');
+          // Clear any pending timeouts
+          if (hoverTimeouts.has(otherItem)) {
+            clearTimeout(hoverTimeouts.get(otherItem));
+            hoverTimeouts.delete(otherItem);
+          }
         });
 
         // Toggle this one
@@ -236,22 +246,123 @@ y<!DOCTYPE html>
           item.classList.add('is-open');
         }
       });
-    });
 
-    // Arrow navigation
-    leftArrow.addEventListener('click', () => {
-      timeline.scrollBy({
-        left: -340,
-        behavior: 'smooth'
+      // Keyboard support - Enter key to toggle
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
+        }
+      });
+
+      // Hover delay logic - for desktop hover-to-open
+      item.addEventListener('mouseenter', () => {
+        // Clear any existing timeout for this item
+        if (hoverTimeouts.has(item)) {
+          clearTimeout(hoverTimeouts.get(item));
+          hoverTimeouts.delete(item);
+        }
+      });
+
+      item.addEventListener('mouseleave', () => {
+        // Only apply delay if not manually opened (is-open class)
+        if (!item.classList.contains('is-open')) {
+          // Set timeout to close the card after delay
+          const timeout = setTimeout(() => {
+            // Do nothing - just let CSS handle the closing via :hover
+            hoverTimeouts.delete(item);
+          }, HOVER_DELAY);
+          
+          hoverTimeouts.set(item, timeout);
+        }
       });
     });
 
-    rightArrow.addEventListener('click', () => {
-      timeline.scrollBy({
-        left: 340,
-        behavior: 'smooth'
+    // Helper function to get safe scroll position
+    function getSafeScrollPosition(targetScroll) {
+      if (!timeline) return targetScroll;
+      
+      const maxScroll = timeline.scrollWidth - timeline.clientWidth;
+      // Clamp the scroll position within valid bounds
+      return Math.max(0, Math.min(targetScroll, maxScroll));
+    }
+
+    // Arrow navigation with smooth scrolling to snap points
+    if (leftArrow) {
+      leftArrow.addEventListener('click', () => {
+        // Scroll left with snap alignment, preventing cutoff
+        const newPosition = getSafeScrollPosition(timeline.scrollLeft - 420);
+        timeline.scrollTo({
+          left: newPosition,
+          behavior: 'smooth'
+        });
       });
+    }
+
+    if (rightArrow) {
+      rightArrow.addEventListener('click', () => {
+        // Scroll right with snap alignment, preventing cutoff
+        const newPosition = getSafeScrollPosition(timeline.scrollLeft + 420);
+        timeline.scrollTo({
+          left: newPosition,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // Keyboard navigation - Arrow keys to scroll timeline with snap alignment
+    document.addEventListener('keydown', (e) => {
+      if (timeline && timeline.offsetParent !== null) { // Check if visible
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          const newPosition = getSafeScrollPosition(timeline.scrollLeft - 420);
+          timeline.scrollTo({
+            left: newPosition,
+            behavior: 'smooth'
+          });
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          const newPosition = getSafeScrollPosition(timeline.scrollLeft + 420);
+          timeline.scrollTo({
+            left: newPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
     });
+
+    // Close card when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('[data-timeline-item]') && !e.target.closest('.timeline-arrow')) {
+        // Optional: You could close all cards on click outside
+      }
+    });
+
+    // Add visual feedback to arrows when timeline is at bounds
+    function updateArrowStates() {
+      if (!timeline) return;
+      
+      const isAtStart = timeline.scrollLeft <= 0;
+      const isAtEnd = timeline.scrollLeft + timeline.clientWidth >= timeline.scrollWidth - 10;
+      
+      if (leftArrow) {
+        leftArrow.style.opacity = isAtStart ? '0.5' : '1';
+        leftArrow.style.cursor = isAtStart ? 'not-allowed' : 'pointer';
+      }
+      
+      if (rightArrow) {
+        rightArrow.style.opacity = isAtEnd ? '0.5' : '1';
+        rightArrow.style.cursor = isAtEnd ? 'not-allowed' : 'pointer';
+      }
+    }
+
+    // Update arrow states on scroll
+    if (timeline) {
+      timeline.addEventListener('scroll', updateArrowStates);
+      window.addEventListener('resize', updateArrowStates);
+      // Initial state
+      setTimeout(updateArrowStates, 100);
+    }
   </script>
 </body>
 </html>

@@ -9,33 +9,78 @@ body {
 	/* Poppins is a bold, clean font that pops */
 	font-family: "Poppins", Arial, Helvetica, sans-serif;
 	line-height: 1.6;
-	background-color: #f4f7fb;
+	background: linear-gradient(135deg, #f4f7fb 0%, #e8f1f8 100%);
 	color: #0a1f44;
+	min-height: 100vh;
 }
 
 /* Header / Hero */
 header {
-	background-color: #0a1f44;
+	background: linear-gradient(135deg, #0a1f44, #1a3a5c);
 	color: #ffffff;
-	padding: 32px 16px;
+	padding: 40px 16px;
 	text-align: center;
+	animation: slideDown 0.6s ease;
+	box-shadow: 0 4px 16px rgba(10, 31, 68, 0.2);
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 header img {
 	width: 120px;
 	height: auto;
 	margin-bottom: 12px;
+	transition: transform 0.4s ease;
+	animation: fadeIn 0.8s ease;
+}
+
+header img:hover {
+	transform: scale(1.08) rotate(2deg);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 header h1 {
-	font-size: 2rem;
-	margin-bottom: 8px;
+	font-size: 2.2rem;
+	margin-bottom: 12px;
+	font-weight: 700;
+	letter-spacing: -0.5px;
+	animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 header p {
 	max-width: 640px;
 	margin: 0 auto;
 	font-size: 1rem;
+	animation: fadeInUp 0.8s ease 0.4s both;
+	opacity: 0.95;
 }
 
 /* Timeline layout */
@@ -44,11 +89,12 @@ main {
 }
 
 .timeline-wrapper {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
+  position: relative;
 }
 
 .timeline {
@@ -56,12 +102,15 @@ main {
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  padding: 8px 4px 16px;
+  padding: 12px 4px 20px;
   scroll-snap-type: x mandatory;
+  scroll-padding: 40px;
   flex: 1;
   /* Hide scrollbar */
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
 }
 
 .timeline::-webkit-scrollbar {
@@ -70,7 +119,7 @@ main {
 
 /* Arrow navigation buttons */
 .timeline-arrow {
-  background-color: #3a7bd5;
+  background: linear-gradient(135deg, #3a7bd5, #2196F3);
   color: #ffffff;
   border: none;
   border-radius: 50%;
@@ -79,14 +128,32 @@ main {
   min-width: 48px;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  align-self: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(58, 123, 213, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 1;
+  /* Touch-friendly */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .timeline-arrow:hover {
-  background-color: #2e5fa8;
-  transform: scale(1.1);
+  background: linear-gradient(135deg, #2e5fa8, #1976D2);
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(58, 123, 213, 0.4);
+}
+
+.timeline-arrow:active {
+  transform: scale(0.95);
+}
+
+.timeline-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .timeline-arrow-left {
@@ -100,19 +167,33 @@ main {
 /* Each timeline item */
 .timeline-item {
 	/* One big bubble that holds the year + details */
-	background-color: #ffffff;
+	background: linear-gradient(135deg, #ffffff, #f8fbff);
 	border-radius: 16px;
-	padding: 16px;
+	padding: 18px;
 	margin: 12px 0;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 4px 12px rgba(10, 31, 68, 0.08);
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 12px;
-	min-width: 260px;
-	max-width: 320px;
-	scroll-snap-align: start;
+	min-width: 345px;
+	max-width: 385px;
+	scroll-snap-align: center;
+	scroll-snap-stop: always;
+	scroll-margin: 40px;
+	transition: all 0.3s ease;
+	border-left: 4px solid #3a7bd5;
+	overflow: hidden;
+}
+
+/* Hover effect on timeline item */
+.timeline-item:hover {
+	box-shadow: 0 16px 32px rgba(58, 123, 213, 0.25), 
+	            0 0 20px rgba(33, 150, 243, 0.1);
+	transform: translateY(-8px) scale(1.02);
+	border-left-color: #2196F3;
+	background: linear-gradient(135deg, #ffffff, #e3f2fd);
 }
 
 /* The dot on the timeline */
@@ -123,23 +204,40 @@ main {
 
 /* The year button */
 .timeline-year {
-	background-color: #ffffff;
+	background: linear-gradient(135deg, #ffffff, #f0f7ff);
 	border: 2px solid #3a7bd5;
 	color: #0a1f44;
-	padding: 6px 12px;
-	border-radius: 20px;
-	font-weight: bold;
+	padding: 8px 16px;
+	border-radius: 24px;
+	font-weight: 700;
 	font-size: 0.95rem;
 	cursor: pointer;
-	transition: background-color 0.2s ease, color 0.2s ease;
+	transition: all 0.3s ease;
 	flex-shrink: 0;
 	text-align: center;
+	box-shadow: 0 2px 8px rgba(58, 123, 213, 0.1);
+	/* Touch-friendly */
+	-webkit-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .timeline-year:hover,
 .timeline-year:focus {
-	background-color: #3a7bd5;
+	background: linear-gradient(135deg, #3a7bd5, #2196F3);
 	color: #ffffff;
+	transform: scale(1.12) translateY(-2px);
+	box-shadow: 0 8px 16px rgba(58, 123, 213, 0.4);
+	outline: none;
+}
+
+.timeline-year:focus {
+	outline: 2px solid #2196F3;
+	outline-offset: 2px;
+}
+
+.timeline-year:active {
+	transform: scale(0.96);
 }
 
 /* The card that opens and closes */
@@ -156,9 +254,11 @@ main {
 	max-height: 0;
 	overflow: hidden;
 	opacity: 0;
-	transform: translateY(-6px);
-	/* Smooth transition */
-	transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+	transform: translateY(-8px);
+	/* Smooth transition - includes delay on close */
+	transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+	            opacity 0.4s ease, 
+	            transform 0.4s ease;
 }
 
 /* Card images */
@@ -168,10 +268,39 @@ main {
 	display: block;
 	margin: 8px 0 12px;
 	border-radius: 10px;
+	transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+	            filter 0.3s ease,
+	            box-shadow 0.3s ease;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item:hover .timeline-card img {
+	transform: scale(1.08);
+	filter: brightness(1.1);
+	box-shadow: 0 8px 20px rgba(58, 123, 213, 0.2);
 }
 
 .timeline-card h3 {
 	margin-bottom: 8px;
+	color: #0a1f44;
+	font-size: 1.1rem;
+	transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-item:hover .timeline-card h3 {
+	color: #2196F3;
+	transform: translateX(4px);
+}
+
+.timeline-card p {
+	font-size: 0.9rem;
+	color: #455a7a;
+	line-height: 1.5;
+	transition: color 0.3s ease;
+}
+
+.timeline-item:hover .timeline-card p {
+	color: #0a1f44;
 }
 
 /* Show card on hover (and on keyboard focus) */
@@ -180,6 +309,8 @@ main {
 	max-height: 800px;
 	opacity: 1;
 	transform: translateY(0);
+	/* No delay when opening */
+	transition-delay: 0s;
 }
 
 /* Show card when a phone tap marks it open */
@@ -187,33 +318,199 @@ main {
 	max-height: 800px;
 	opacity: 1;
 	transform: translateY(0);
+	/* No delay when opening */
+	transition-delay: 0s;
+}
+
+/* Add delay when card is closing (not hovered, not focused, not open) */
+.timeline-item .timeline-card {
+	transition-delay: 0.3s;
 }
 
 /* Small helper text */
 .timeline-hint {
 	max-width: 800px;
-	margin: 12px auto 0;
+	margin: 12px auto 24px;
 	text-align: center;
 	font-size: 0.95rem;
 	color: #455a7a;
+	transition: opacity 0.3s ease;
 }
 
-/* Simple responsive tweaks */
-@media (max-width: 600px) {
+/* Show desktop hint by default */
+.hint-desktop {
+	display: inline;
+}
+
+.hint-mobile {
+	display: none;
+}
+
+/* Responsive design - Medium screens (tablets, half-laptop size) */
+@media (max-width: 1024px) {
+	/* Reduce card size on medium screens */
+	.timeline-item {
+		min-width: 280px;
+		max-width: 320px;
+		padding: 14px;
+		gap: 10px;
+	}
+
+	/* Reduce year button padding */
+	.timeline-year {
+		padding: 6px 12px;
+		font-size: 0.9rem;
+	}
+
+	/* Reduce card image size */
+	.timeline-card img {
+		margin: 6px 0 10px;
+		border-radius: 8px;
+	}
+
+	/* Reduce image hover scale to prevent overflow */
+	.timeline-item:hover .timeline-card img {
+		transform: scale(1.00);
+	}
+
+	/* Reduce card heading size */
+	.timeline-card h3 {
+		font-size: 1rem;
+		margin-bottom: 6px;
+	}
+
+	/* Reduce paragraph font size */
+	.timeline-card p {
+		font-size: 0.85rem;
+	}
+
+	/* Reduce timeline wrapper max-width for better spacing */
+	.timeline-wrapper {
+		max-width: 1000px;
+	}
+
+	/* Reduce arrow button size */
+	.timeline-arrow {
+		width: 40px;
+		height: 40px;
+		font-size: 1rem;
+	}
+
+	/* Reduce hover scale to prevent overflow */
+	.timeline-year:hover,
+	.timeline-year:focus {
+		transform: scale(1.02) translateY(-2px);
+	}
+
+	/* Reduce active scale too */
+	.timeline-year:active {
+		transform: scale(0.98);
+	}
+}
+
+/* Extra small screens - prevent overflow on tiny devices */
+@media (max-width: 400px) {
+	/* Reduce hover scale to prevent cutoff */
+	.timeline-year:hover,
+	.timeline-year:focus {
+		transform: scale(1.00) translateY(-2px);
+	}
+
+	/* Reduce active scale too */
+	.timeline-year:active {
+		transform: scale(0.98);
+	}
+
+	/* Reduce image hover scale even more on tiny screens */
+	.timeline-item:hover .timeline-card img {
+		transform: scale(1.02);
+	}
+}
+
+/* Responsive design - Mobile first approach */
+@media (max-width: 768px) {
+	/* Show mobile hint, hide desktop hint */
+	.hint-desktop {
+		display: none;
+	}
+
+	.hint-mobile {
+		display: inline;
+	}
+
+	/* Stack timeline vertically on smaller screens */
+	.timeline-wrapper {
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	/* Hide arrow buttons on mobile - not needed for vertical layout */
+	.timeline-arrow {
+		display: none;
+	}
+
+	/* Stack timeline items vertically */
+	.timeline {
+		flex-direction: column;
+		overflow-x: visible;
+		overflow-y: visible;
+		padding: 12px 4px;
+		scroll-snap-type: none;
+		max-width: 100%;
+		gap: 16px;
+	}
+
+	/* Adjust timeline items for vertical layout */
+	.timeline-item {
+		min-width: 100%;
+		max-width: 100%;
+		scroll-snap-align: none;
+		width: 100%;
+	}
+
+	/* Timeline year button takes full width */
+	.timeline-year {
+		width: 100%;
+		text-align: left;
+		padding: 10px 12px;
+	}
+
 	header h1 {
 		font-size: 1.6rem;
 	}
 
-	.timeline-year {
-		width: 100%;
-		text-align: left;
+	header p {
+		font-size: 0.95rem;
 	}
 
-	.timeline-item {
-		flex-direction: column;
+	.timeline-hint {
+		font-size: 0.85rem;
+		margin: 12px auto 16px;
 	}
+}
 
-	.timeline {
-		max-width: 100%;
+/* Staggered entrance animation for timeline items */
+.timeline-item {
+	animation: itemFadeIn 0.6s ease backwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0s; }
+.timeline-item:nth-child(2) { animation-delay: 0.1s; }
+.timeline-item:nth-child(3) { animation-delay: 0.2s; }
+.timeline-item:nth-child(4) { animation-delay: 0.3s; }
+.timeline-item:nth-child(5) { animation-delay: 0.4s; }
+.timeline-item:nth-child(6) { animation-delay: 0.5s; }
+.timeline-item:nth-child(7) { animation-delay: 0.6s; }
+.timeline-item:nth-child(8) { animation-delay: 0.7s; }
+.timeline-item:nth-child(9) { animation-delay: 0.8s; }
+
+@keyframes itemFadeIn {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
 	}
 }
