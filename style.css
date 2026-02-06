@@ -185,6 +185,7 @@ main {
 	transition: all 0.3s ease;
 	border-left: 4px solid #3a7bd5;
 	overflow: hidden;
+	animation: itemFadeIn 0.6s ease backwards;
 }
 
 /* Hover effect on timeline item */
@@ -348,6 +349,15 @@ main {
 
 /* Responsive design - Medium screens (tablets, half-laptop size) */
 @media (max-width: 1024px) {
+	/* Show mobile hint, hide desktop hint */
+	.hint-desktop {
+		display: none;
+	}
+
+	.hint-mobile {
+		display: inline;
+	}
+
 	/* Reduce card size on medium screens */
 	.timeline-item {
 		min-width: 280px;
@@ -362,6 +372,12 @@ main {
 		font-size: 0.9rem;
 	}
 
+	/* Reduce year button hover scale */
+	.timeline-year:hover,
+	.timeline-year:focus {
+		transform: scale(1.02) translateY(-2px);
+	}
+
 	/* Reduce card image size */
 	.timeline-card img {
 		margin: 6px 0 10px;
@@ -370,7 +386,7 @@ main {
 
 	/* Reduce image hover scale to prevent overflow */
 	.timeline-item:hover .timeline-card img {
-		transform: scale(1.00);
+		transform: scale(1.04);
 	}
 
 	/* Reduce card heading size */
@@ -395,49 +411,10 @@ main {
 		height: 40px;
 		font-size: 1rem;
 	}
-
-	/* Reduce hover scale to prevent overflow */
-	.timeline-year:hover,
-	.timeline-year:focus {
-		transform: scale(1.02) translateY(-2px);
-	}
-
-	/* Reduce active scale too */
-	.timeline-year:active {
-		transform: scale(0.98);
-	}
-}
-
-/* Extra small screens - prevent overflow on tiny devices */
-@media (max-width: 400px) {
-	/* Reduce hover scale to prevent cutoff */
-	.timeline-year:hover,
-	.timeline-year:focus {
-		transform: scale(1.00) translateY(-2px);
-	}
-
-	/* Reduce active scale too */
-	.timeline-year:active {
-		transform: scale(0.98);
-	}
-
-	/* Reduce image hover scale even more on tiny screens */
-	.timeline-item:hover .timeline-card img {
-		transform: scale(1.02);
-	}
 }
 
 /* Responsive design - Mobile first approach */
 @media (max-width: 768px) {
-	/* Show mobile hint, hide desktop hint */
-	.hint-desktop {
-		display: none;
-	}
-
-	.hint-mobile {
-		display: inline;
-	}
-
 	/* Stack timeline vertically on smaller screens */
 	.timeline-wrapper {
 		flex-direction: column;
@@ -489,11 +466,26 @@ main {
 	}
 }
 
-/* Staggered entrance animation for timeline items */
-.timeline-item {
-	animation: itemFadeIn 0.6s ease backwards;
+/* Extra small screens - prevent overflow on tiny devices */
+@media (max-width: 400px) {
+	/* Reduce hover scale to prevent cutoff */
+	.timeline-year:hover,
+	.timeline-year:focus {
+		transform: scale(1.05) translateY(-2px);
+	}
+
+	/* Reduce active scale too */
+	.timeline-year:active {
+		transform: scale(0.98);
+	}
+
+	/* Reduce image hover scale even more on tiny screens */
+	.timeline-item:hover .timeline-card img {
+		transform: scale(1.02);
+	}
 }
 
+/* Staggered entrance animation for timeline items */
 .timeline-item:nth-child(1) { animation-delay: 0s; }
 .timeline-item:nth-child(2) { animation-delay: 0.1s; }
 .timeline-item:nth-child(3) { animation-delay: 0.2s; }
