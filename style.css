@@ -41,6 +41,8 @@ header img {
 	margin-bottom: 12px;
 	transition: transform 0.4s ease;
 	animation: fadeIn 0.8s ease;
+	/* Add a white glow around the logo */
+	filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
 }
 
 header img:hover {
