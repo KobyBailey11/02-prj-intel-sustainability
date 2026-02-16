@@ -211,6 +211,126 @@
     </button>
   </div>
 
+    <!-- New Bootstrap Grid Section (three columns) -->
+    <section class="container my-5" aria-label="Sustainability focus areas">
+      <!-- Bootstrap row holds the columns -->
+      <div class="row">
+        <!-- Each column is full width on small screens, one-third on medium and up -->
+        <div class="col-12 col-md-4 mb-4">
+          <h2>Energy</h2>
+          <p>
+            We invest in renewable electricity and smarter operations to cut
+            emissions and save energy across our sites.
+          </p>
+        </div>
+
+        <div class="col-12 col-md-4 mb-4">
+          <h2>Water</h2>
+          <p>
+            We restore more water than we use and improve efficiency in every
+            step of manufacturing.
+          </p>
+        </div>
+
+        <div class="col-12 col-md-4 mb-4">
+          <h2>Waste</h2>
+          <p>
+            We design for reuse and recycling, keeping materials in circulation
+            and reducing landfill impact.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap Accordion Section (interactive component) -->
+    <section class="container my-5" aria-label="Sustainability FAQs">
+      <h2>Quick FAQs</h2>
+
+      <!-- Accordion wrapper -->
+      <div class="accordion" id="sustainabilityFaq">
+        <!-- Accordion item 1 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="faqHeadingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#faqCollapseOne"
+              aria-expanded="true"
+              aria-controls="faqCollapseOne"
+            >
+              How does Intel reduce emissions?
+            </button>
+          </h3>
+          <div
+            id="faqCollapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="faqHeadingOne"
+            data-bs-parent="#sustainabilityFaq"
+          >
+            <div class="accordion-body">
+              We invest in renewable energy, improve factory efficiency, and
+              use cleaner chemicals to lower greenhouse gas emissions.
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion item 2 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="faqHeadingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#faqCollapseTwo"
+              aria-expanded="false"
+              aria-controls="faqCollapseTwo"
+            >
+              What is the RISE strategy?
+            </button>
+          </h3>
+          <div
+            id="faqCollapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="faqHeadingTwo"
+            data-bs-parent="#sustainabilityFaq"
+          >
+            <div class="accordion-body">
+              RISE stands for Responsible, Inclusive, Sustainable, and Enabling,
+              guiding Intel's 2030 goals for people and the planet.
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion item 3 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="faqHeadingThree">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#faqCollapseThree"
+              aria-expanded="false"
+              aria-controls="faqCollapseThree"
+            >
+              How can I learn more?
+            </button>
+          </h3>
+          <div
+            id="faqCollapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="faqHeadingThree"
+            data-bs-parent="#sustainabilityFaq"
+          >
+            <div class="accordion-body">
+              Visit Intel's sustainability reports to explore detailed progress
+              updates and long-term commitments.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Small script to support tap-to-toggle on phones -->
@@ -363,6 +483,35 @@
       // Initial state
       setTimeout(updateArrowStates, 100);
     }
+  </script>
+
+  <!-- Detect language changes (like Google Translate) and apply RTL if needed -->
+  <script>
+    const rtlLangs = ['ar', 'he', 'fa', 'ur'];
+
+    function isRtlLanguage(lang) {
+      if (!lang) return false;
+      // Normalize to the base language, like "ar" from "ar-EG"
+      const base = lang.toLowerCase().split('-')[0];
+      return rtlLangs.includes(base);
+    }
+
+    function applyRtlFromLang() {
+      const pageLang = document.documentElement.getAttribute('lang') || '';
+      const shouldBeRtl = isRtlLanguage(pageLang);
+      // Set direction on the root element so layout flows RTL
+      document.documentElement.setAttribute('dir', shouldBeRtl ? 'rtl' : 'ltr');
+    }
+
+    // Run once on page load
+    applyRtlFromLang();
+
+    // Watch for changes to the lang attribute (Google Translate updates it)
+    const langObserver = new MutationObserver(applyRtlFromLang);
+    langObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['lang']
+    });
   </script>
 </body>
 </html>
